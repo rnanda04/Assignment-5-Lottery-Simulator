@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Massachusetts Lottery: Lucky for Life</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100&display=swap" rel="stylesheet">
+</head>
+<body>
+	<h1><strong>Massachusetts Lottery: Lucky for Life</strong></h1>
+	<img src="lottery.png">
+	<h2>Lucky for Life</h2>
+	<div id = "lottery">
+		<div id = "div1"></div>
+		<div id = "div2"></div>
+		<div id = "div3"></div>
+		<div id = "div4"></div>
+		<div id = "div5"></div>
+	</div>
+	<script type="text/javascript">
+		var arr1 = prompt("Please Write 5 Numbers (1 - 48)");
+		var arr2 = arr1.split(' ');
+		var arr2 = arr2.sort(function(a, b) {
+  			return a - b;
+		}); 
+		var arr3 = arr2; 
+		
+
+		var ball = prompt("Please Write a Lucky Ball Number (1 - 18)");
+		var random_ball = Math.floor(Math.random() * 17 + 1);
+		//document.write(random_ball);
+
+		var num = Array.from({length: 5}, () => Math.floor(Math.random() * 47 + 1));
+		var num2 = num.sort(function(a, b) {
+  			return a - b;
+		});
+
+		
+		function checkLucky(ball, random_ball) {
+			if (ball == random_ball) {
+				return 1; 
+			}
+			else {
+				return 0; 
+			}
+		}
+
+		function checkNumbers(num2, arr3) {
+			var ctr = 0; 
+			for (let i = 0; i < 5; i++) {
+				if (num2[i] == arr3[i]) {
+					ctr++;
+				}
+			}
+			return ctr; 
+		}
+
+		var num_checker = checkNumbers(num2, arr3);
+		//document.write(num_checker);
+
+
+		var ball_checker = checkLucky(ball, random_ball); 
+		//document.write(ball_checker);
+
+
+		function checkMatches(num_checker, ball_checker) {
+			if (num_checker == 5 && ball_checker == 1) {
+				document.getElementById("div5").innerHTML = "Winnings: $7,000 a WEEK for LIFE"; 
+			}
+			else if (num_checker == 5 && ball_checker == 0) {
+				document.getElementById("div5").innerHTML = "Winnings: $25,000 a YEAR for LIFE";
+			}
+			else if (num_checker == 4 && ball_checker == 1) {
+				document.getElementById("div5").innerHTML = "Winnings: $5,000";
+			}
+			else if (num_checker == 4 && ball_checker == 0) {
+				document.getElementById("div5").innerHTML = "Winnings: $200";
+			}
+			else if (num_checker == 3 && ball_checker == 1) {
+				document.getElementById("div5").innerHTML = "Winnings: $150";
+			}
+			else if (num_checker == 3 && ball_checker == 0) {
+				document.getElementById("div5").innerHTML = "Winnings: $20";
+			}
+			else if (num_checker == 2 && ball_checker == 1) {
+				document.getElementById("div5").innerHTML = "Winnings: $25";
+			}
+			else if (num_checker == 2 && ball_checker == 0) {
+				document.getElementById("div5").innerHTML = "Winnings: $3"; 
+			}
+			else if (num_checker == 1 && ball_checker == 1) {
+				document.getElementById("div5").innerHTML = "Winnings: $6";
+			}
+			else if (num_checker == 0 && ball_checker == 1) {
+				document.getElementById("div5").innerHTML = "Winnings: $4";
+			}
+			else {
+				document.getElementById("div5").innerHTML = "Winnings: $0";
+			}
+		}
+
+		document.getElementById("div1").innerHTML = "Random Pick: " + arr1 + " Lucky " + ball; 
+		document.getElementById("div2").innerHTML = "Pick Sorted: " + arr3 + " Lucky " + ball; 
+		document.getElementById("div3").innerHTML = "Winning Numbers Sorted: " + num2 + " Lucky " + random_ball; 
+		document.getElementById("div4").innerHTML = "Number Matching: " + num_checker;  
+		checkMatches(num_checker, ball_checker);
+	
+		
+
+	</script>
+	
+
+</body>
+</html>
